@@ -11,9 +11,9 @@ body {
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  width: 97vw;
-  padding: 10px 0px;
-  margin: 10px;
+  width:100vw;
+  padding: 0px;
+  margin: 0px;
   background-color: #638bfa;
 }
 

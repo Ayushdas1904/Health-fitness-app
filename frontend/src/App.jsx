@@ -1,17 +1,22 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from "./Home.jsx";
-import Login from "./Login.jsx";
-import SignUp from './SignUp.jsx';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import Home from "./Components/Home.jsx";
+import Login from "./Components/Login.jsx";
+import SignUp from './Components/SignUp.jsx';
 import NavBar from "./NavBar.jsx";
-import Food from "./Food.jsx";
-import Store from "./Store.jsx";
-import MyProfile from "./MyProfile.jsx";
+import Food from "./Components/Food.jsx";
+import Store from "./Components/Store.jsx";
+import MyProfile from "./Components/MyProfile.jsx";
 
-function App() {
+function AppWrapper() {
+  const location = useLocation();
+
+  // Hide the NavBar on login and signup pages
+  const hideNavBar = location.pathname === '/login' || location.pathname === '/signup';
+
   return (
-    <BrowserRouter>
-      <NavBar /> {/* Include the NavBar in all pages */}
+    <>
+      {!hideNavBar && <NavBar />} {/* Conditionally render NavBar */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
@@ -21,6 +26,14 @@ function App() {
         <Route path="/store" element={<Store />} />
         <Route path="/profile" element={<MyProfile />} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppWrapper />
     </BrowserRouter>
   );
 }
